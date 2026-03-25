@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, cast
 
 import httpx
 
@@ -22,6 +22,13 @@ def process_block_response(
         return response.text
     elif cast_to == NoneType:
         return None
+    elif cast_to == dict:
+        try:
+            return cast(ResponseT, response.json())
+        except Exception as e:
+            raise ParsingDataError(
+                message=f"Error during parsing of response data: {str(e)}"
+            )
     elif issubclass(cast_to, (ExtraForbidModel, ExtraAllowModel)):
         try:
             data = response.json()
