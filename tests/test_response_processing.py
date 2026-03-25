@@ -12,7 +12,6 @@ Fix 2 – BaseMetadata.name must be Optional[str] because the API returns
 
 import json
 from unittest.mock import MagicMock, patch
-from unittest.mock import MagicMock, patch
 
 import httpx
 import pytest
